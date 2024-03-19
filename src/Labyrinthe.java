@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -77,7 +78,7 @@ class Labyrinthe {
          for (int y = 0; y < murs[0].length; y++) {
             laby += getChar(x, y) + "  ";
          }
-         laby += "\n\n";
+         laby += "\n";
       }
       return laby;
    }
@@ -87,21 +88,48 @@ class Labyrinthe {
       return personnage.equals(sortie);
    }
 
-   // TODO Créer une classe Personnage et initialiser sa position, faire pareil avec Sortie
-   public static Labyrinthe chargerLabyrinthe(String nom) throws IOException {
-      FileReader file = new FileReader(nom);
-      int x = file.read();
-      int y = file.read();
-      int c;
+   public static Labyrinthe chargerLabyrinthe(String nom) throws IOException, FichierIncorrectException {
+      Personnage perso = null;
+      Sortie sortie = null;
+      BufferedReader file = new BufferedReader(new FileReader(nom));
+      int x = Integer.parseInt(file.readLine());
+      int y = Integer.parseInt(file.readLine());
+      String c = "";
       boolean[][] murs = new boolean[x][y];
-      for (int i=0; i<x; i++){
-         for(int j=0; j<y; j++){
-            c = file.read();
-            if ((char)c == MUR) murs[i][j] = true;
-            else murs[i][j] = false;
+      int ligne = 0;
+      while ((c = file.readLine()) != null) {
+         if (c.length() != y)
+            throw new FichierIncorrectException("nbColonnes ne correspond pas");
+         if (ligne >= x)
+            throw new FichierIncorrectException("nbLignes ne correspond pas");
+         for (int colonne = 0; colonne < c.length(); colonne++) {
+            if (c.charAt(colonne) == MUR) murs[ligne][colonne] = true;
+            else {
+               murs[ligne][colonne] = false;
+               if (c.charAt(colonne) == PJ && perso != null)
+                  throw new FichierIncorrectException("Plusieurs personnages");
+               if (c.charAt(colonne) == PJ) perso = new Personnage(ligne, colonne);
+               if (c.charAt(colonne) == SORTIE && sortie != null)
+                  throw new FichierIncorrectException("Plusieurs sorties");
+               if (c.charAt(colonne) == SORTIE) sortie = new Sortie(ligne, colonne);
+            }
          }
+         ligne++;
       }
+      if (ligne < x)
+         throw new FichierIncorrectException("nbLignes ne correspond pas");
+      if (perso == null) throw new FichierIncorrectException("Personnage inconnu");
+      if (sortie == null) throw new FichierIncorrectException("Sortie inconnue");
 
+      file.close();
+      return new Labyrinthe(murs, perso, sortie);
    }
 
+
+   public static void main(String[] args) throws IOException, ActionInconnueException, FichierIncorrectException {
+
+      Labyrinthe laby = Labyrinthe.chargerLabyrinthe("./Projet_Laby/laby/laby_pasSortie.txt");
+      System.out.println(laby);
+
+   }
 }
