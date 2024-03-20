@@ -1,4 +1,4 @@
-# Projet Laby  
+# Projet Labyrinthe Ricochet
 ### Auteurs 
 [Rémi Choffat](https://github.com/remi-choffat) et [Mathieu Graff](https://github.com/Cesareuh)  
   
@@ -12,3 +12,16 @@ Pour lancer l'application, il faut :
   
 — un résumé des résultats de vos tests (ce qui réussit / échoue éventuellement) ;  
 — une présentation de votre couverture de test et des explications associées.  
+
+### Conception et programmation
+#### Difficultés rencontrées
+Descriptif des difficultés rencontrées au cours du TP.
+
+#### Choix de programmation
+Explication de nos choix de programmation.
+
+#### Résultats des tests
+Résumé des résultats de nos tests (ce qui réussit / échoue éventuellement).
+
+#### Couverture de test
+Présentation de notre couverture de test et des explications associées.
