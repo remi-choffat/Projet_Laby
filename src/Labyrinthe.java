@@ -15,6 +15,7 @@ class Labyrinthe {
    private static final String BAS = "bas";
    private static final String GAUCHE = "gauche";
    private static final String DROITE = "droite";
+   private static final String ESP = " ";
 
 
    private boolean[][] murs;
@@ -104,11 +105,30 @@ class Labyrinthe {
       String laby = "";
       for (int x = 0; x < murs.length; x++) {
          for (int y = 0; y < murs[0].length; y++) {
-            laby += getChar(x, y) + "  ";
+            laby += colorer(ESP + getChar(x, y) + ESP);
          }
          laby += "\n";
       }
       return laby;
+   }
+
+   /**
+    * Renvoie le caractère avec une couleur qui dépend de son type.
+    * @param c Caractère à colorer.
+    * @return Caractère coloré.
+    */
+   public String colorer(String c) {
+      switch (c) {
+         case ESP+MUR+ESP:
+            return "\u001B[45m" + c + "\u001B[0m";
+         case ESP+PJ+ESP:
+            if(personnage.equals(sortie)) return "\u001B[36;43m" + c + "\u001B[0m";
+            else return "\u001B[36m" + c + "\u001B[0m";
+         case ESP+SORTIE+ESP:
+            return "\u001B[43m" + c + "\u001B[0m";
+         default:
+            return c + "";
+      }
    }
 
    /**

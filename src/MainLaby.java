@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -6,15 +5,31 @@ import java.util.Scanner;
  */
 public class MainLaby {
 
-   // TODO Faire en sorte de gérer les exceptions FichierIncorrectException
-   public static void main(String[] args) throws IOException, FichierIncorrectException {
+   public static Labyrinthe labyOK(String nom, Scanner sc) {
+      Labyrinthe laby = null;
+      try {
+         laby = Labyrinthe.chargerLabyrinthe(nom);
 
-      Labyrinthe laby = Labyrinthe.chargerLabyrinthe(args[0]);
-      System.out.println(laby);
+      } catch (Exception e) {
+         System.out.println("\u001B[91m" + e.getMessage() + "\u001B[0m\n");
+         System.out.print("Veuillez entrer un nom de fichier correct : ");
+         laby = labyOK(sc.nextLine(), sc);
+      }
+      return laby;
+   }
+
+   public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
+
+      Labyrinthe laby = labyOK(args[0], sc);
+      System.out.println("\033[H\033[2J");
+      System.out.println(laby);
+
       while (!laby.etreFini()) {
-         System.out.println("Entrez une direction (haut, bas, gauche, droite) : ");
+
+         System.out.print("Entrez une direction (haut, bas, gauche, droite) : ");
          String direction = sc.nextLine();
+         System.out.println("\033[H\033[2J");
          if (direction.equalsIgnoreCase("exit")) {
             System.out.println("Vous avez quitté le jeu");
             return;
@@ -22,11 +37,11 @@ public class MainLaby {
          try {
             laby.deplacerPerso(direction);
          } catch (ActionInconnueException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[91m" + e.getMessage() + "\u001B[0m\n");
          }
          System.out.println(laby);
       }
-      System.out.println("Le jeu est terminé, vous avez gagné");
+      System.out.println("\u001B[33mLe jeu est terminé, vous avez gagné\u001B[0m\n");
 
    }
 
