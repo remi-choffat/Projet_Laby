@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// TODO Tests unitaires pour les méthodes de la classe Labyrinthe
-
 /**
  * classe de test fournie destinee a verifier les methodes
  */
