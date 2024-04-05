@@ -3,7 +3,7 @@
 ### Auteurs 
 [Rémi Choffat](https://github.com/remi-choffat) et [Mathieu Graff](https://github.com/Cesareuh)  
 
-<p><img src="https://github.com/remi-choffat/Projet_Laby/assets/92942158/fc082336-7176-4897-9c09-95c09db35e58" width="40%" height="40%"/></p>
+<p><img src="img/Labyrinthe.png" width="40%" height="40%"/></p>
   
 ### Lancement de l'application
 Pour lancer l'application, il faut :  
@@ -19,7 +19,7 @@ Nous avons décidé d'aller plus loin que ce qui était attendu, en essayant d'a
 
 #### Résultats des tests
 Nous avons réalisé nos tests en nous basant, pour la plupart, sur les fichiers labyrinthe fournis. Tous nos tests sont validés.
-<p><img src="https://github.com/remi-choffat/Projet_Laby/assets/92942158/ff93202b-3b9c-4737-8a96-ae1f6d4b5ccb" width="30%" height="30%"/></p>
+<p><img src="img/Tests_valides.png" width="30%" height="30%"/></p>
 
 #### Couverture de test
 
@@ -29,5 +29,5 @@ Nous testons :
  - La méthode ```getSuivant()``` avec une direction valide, puis avec une direction invalide
  - La méthode ```deplacerPerso()``` lors d'un déplacement normal, d'un déplacement contre un mur, et d'un déplacement en dehors des limites du labyrinthe
  - La méthode ```chargerLabyrinthe()``` lors d'un chargement normal, et d'un chargement avec un fichier incorrect
-<p><img src="https://github.com/remi-choffat/Projet_Laby/assets/92942158/482dc8f5-648d-4a58-be96-550d9ce4fbab" width="40%" height="40%"/></p>
+<p><img src="img/Couverture_test.png" width="40%" height="40%"/></p>
 
