@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -18,12 +19,23 @@ public class MainLaby {
       // Essaie de charger le labyrinthe
       try {
          laby = Labyrinthe.chargerLabyrinthe(nom);
+      } catch (IOException e) {
+         // Erreur d'entrée/sortie
+         System.out.println("\u001B[91mLe fichier " + nom + " est incorrect\u001B[0m\n");
+         System.out.print("Veuillez entrer un nom de fichier correct : ");
+         laby = labyOK(sc.nextLine(), sc);
+      } catch (FichierIncorrectException e) {
+         // Fichier incorrect
+         System.out.println("\u001B[91m" + e.getMessage() + "\u001B[0m\n");
+         System.out.print("Veuillez entrer un nom de fichier correct : ");
+         laby = labyOK(sc.nextLine(), sc);
       } catch (Exception e) {
-         // Si le fichier n'existe pas, on demande un autre nom de fichier
+         // Autre erreur
          System.out.println("\u001B[91m" + e.getMessage() + "\u001B[0m\n");
          System.out.print("Veuillez entrer un nom de fichier correct : ");
          laby = labyOK(sc.nextLine(), sc);
       }
+      // Renvoie le labyrinthe (correct) chargé
       return laby;
    }
 

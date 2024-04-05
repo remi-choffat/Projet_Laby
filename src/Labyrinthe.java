@@ -7,20 +7,31 @@ import java.io.IOException;
  */
 class Labyrinthe {
 
+   // Constantes qui représentent les caractères du labyrinthe
    public static final char MUR = 'X';
    public static final char PJ = 'P';
    public static final char SORTIE = 'S';
    public static final char VIDE = '.';
+
+   // Constantes qui représentent les directions possibles
    public static final String HAUT = "haut";
    public static final String BAS = "bas";
    public static final String GAUCHE = "gauche";
    public static final String DROITE = "droite";
    public static final String ESP = " ";
 
-
-   private boolean[][] murs;
-   private Personnage personnage;
-   private Sortie sortie;
+   /**
+    * Tableau 2D de booléens représentant le labyrinthe (murs)
+    */
+   private final boolean[][] murs;
+   /**
+    * Personnage qui se déplace dans le labyrinthe
+    */
+   private final Personnage personnage;
+   /**
+    * Sortie du labyrinthe
+    */
+   private final Sortie sortie;
 
    /**
     * Constructeur pour la classe Labyrinthe.
@@ -67,14 +78,17 @@ class Labyrinthe {
     * @return Tableau de deux entiers représentant les prochaines coordonnées.
     */
    static int[] getSuivant(int x, int y, String direction) {
-      if (direction.equals(HAUT)) {
-         return new int[]{x - 1, y};
-      } else if (direction.equals(BAS)) {
-         return new int[]{x + 1, y};
-      } else if (direction.equals(GAUCHE)) {
-         return new int[]{x, y - 1};
-      } else {
-         return new int[]{x, y + 1};
+      switch (direction) {
+         case HAUT:
+            return new int[]{x - 1, y};
+         case BAS:
+            return new int[]{x + 1, y};
+         case GAUCHE:
+            return new int[]{x, y - 1};
+         case DROITE:
+            return new int[]{x, y + 1};
+         default:
+            return new int[]{x, y};
       }
    }
 
@@ -137,7 +151,7 @@ class Labyrinthe {
             return "\u001B[43m" + c + "\u001B[0m";
          default:
             // Vide (blanc / couleur par défaut)
-            return c + "";
+            return c;
       }
    }
 
